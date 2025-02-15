@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obtener Lista de Monedas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Obtener Lista de Monedas</h2>
+  <button id="getCurrenciesButton">Obtener Lista de Monedas</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    document.getElementById('getCurrenciesButton').addEventListener('click', async function() {
+      const response = await fetch(`/exchange/getCurrencies`);
+      const result = await response.json();
+
+      let currenciesList = '<h3>Lista de Monedas</h3><ul>';
+      for (const [code, name] of Object.entries(result)) {
+        currenciesList += `<li>${code}: ${name}</li>`;
+      }
+      currenciesList += '</ul>';
+
+      document.getElementById('result').innerHTML = currenciesList;
+    });
+  </script>
+</body>
+</html>

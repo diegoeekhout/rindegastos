@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bienvenido al Cambio al Día de Rindegastos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    a {
+      text-decoration: none;
+      color: #007bff;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h2>Bienvenido al Cambio de Divisas de Rindegastos</h2>
+  <p>Utiliza los siguientes enlaces para acceder a los endpoints:</p>
+  <ul>
+    <li><a href="/concurrency.html">Convertir Divisas</a></li>
+    <li><a href="/exchange/getConvertedAmount?from=USD&to=CLP&amount=500">Cambio de hoy USD a CLP en formato JSON</a></li>
+    <li><a href="/historical.html">Convertir Divisas por fecha</a></li>
+    <li><a href="/exchange/getConvertedAmountHistorical?from=USD&to=CLP&amount=500&date=2025-01-01">Convertir USD a CLP por fecha en formato JSON</a></li>
+    <li><a href="/currencies.html">Obtener Listado de Monedas</a></li>
+    <li><a href="/exchange/getCurrencies">Obtener Listado de Monedas en formato JSON</a></li>
+  </ul>
+  <p>Para el histórico, la fecha se escribe en el formato: año-mes-día (por ejemplo, 2025-01-01).</p>
+</body>
+</html>

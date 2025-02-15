@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convertir Divisas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input, select {
+      margin-bottom: 10px;
+      padding: 5px;
+      width: 100%;
+      max-width: 300px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Convertir Divisas</h2>
+  <form id="conversionForm">
+    <label for="from">Moneda Origen:</label>
+    <input type="text" id="from" name="from" required>
+
+    <label for="to">Moneda Destino:</label>
+    <input type="text" id="to" name="to" required>
+
+    <label for="amount">Monto:</label>
+    <input type="number" id="amount" name="amount" required>
+
+    <button type="submit">Convertir</button>
+  </form>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    document.getElementById('conversionForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const from = document.getElementById('from').value;
+      const to = document.getElementById('to').value;
+      const amount = document.getElementById('amount').value;
+
+      const response = await fetch(`/exchange/getConvertedAmount?from=${from}&to=${to}&amount=${amount}`);
+      const result = await response.json();
+
+      document.getElementById('result').innerHTML = `
+        <h3>Resultado de la Conversión</h3>
+        <p>Moneda Origen: ${result.monedaOrigen}</p>
+        <p>Moneda Destino: ${result.monedaDestino}</p>
+        <p>Monto Original: ${result.montoOriginal}</p>
+        <p>Monto Convertido: ${result.montoConvertido}</p>
+        <p>Tasa: ${result.tasa}</p>
+      `;
+    });
+  </script>
+</body>
+</html>

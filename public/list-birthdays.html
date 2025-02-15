@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Cumpleaños</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Lista de Cumpleañeros</h2>
+  <button id="getBirthdaysButton">Obtener Lista de Cumpleañeros</button>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    document.getElementById('getBirthdaysButton').addEventListener('click', async function() {
+      const response = await fetch('/birthdays/all');
+      if (response.ok) {
+        const result = await response.json();
+
+        let birthdaysList = '<h3>Lista de Cumpleaños</h3><ul>';
+        result.forEach(birthday => {
+          birthdaysList += `<li>${birthday.name}: ${birthday.birthdate} (Faltan ${birthday.daysUntilBirthday} días)</li>`;
+        });
+        birthdaysList += '</ul>';
+
+        document.getElementById('result').innerHTML = birthdaysList;
+      } else {
+        document.getElementById('result').innerHTML = '<p>Error al obtener la lista de cumpleaños.</p>';
+      }
+    });
+  </script>
+</body>
+</html>
