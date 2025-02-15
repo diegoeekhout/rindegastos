@@ -6,7 +6,10 @@ export class BirthdaysController {
   constructor(private readonly birthdaysService: BirthdaysService) {}
 
   @Post('add')
-  addBirthday(@Body('name') name: string, @Body('birthdate') birthdate: string) {
+  addBirthday(
+    @Body('name') name: string,
+    @Body('birthdate') birthdate: string,
+  ) {
     return this.birthdaysService.addBirthday(name, birthdate);
   }
 

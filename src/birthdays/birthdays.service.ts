@@ -29,7 +29,7 @@ export class BirthdaysService {
 
   getRindegastinosBirthdays() {
     const today = moment();
-    return this.rindegastinos.map(rindegastino => {
+    return this.rindegastinos.map((rindegastino) => {
       const nextBirthday = moment(rindegastino.birthdate).year(today.year());
 
       if (nextBirthday.isBefore(today)) {

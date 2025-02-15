@@ -11,7 +11,9 @@ export class ExchangeController {
     const { from, to, amount } = ExchangeDto;
 
     if (!from || !to || !amount) {
-      throw new BadRequestException('Faltan parámetros requeridos: from, to, amount');
+      throw new BadRequestException(
+        'Faltan parámetros requeridos: from, to, amount',
+      );
     }
 
     if (isNaN(amount) || amount <= 0) {
@@ -19,7 +21,11 @@ export class ExchangeController {
     }
 
     try {
-      const result = await this.exchangeService.convertCurrency(from, to, amount);
+      const result = await this.exchangeService.convertCurrency(
+        from,
+        to,
+        amount,
+      );
       return {
         monedaOrigen: from,
         monedaDestino: to,
@@ -29,7 +35,9 @@ export class ExchangeController {
       };
     } catch (error) {
       const errorMessage = (error as Error).message;
-      throw new BadRequestException('Error al convertir la moneda: ' + errorMessage);
+      throw new BadRequestException(
+        'Error al convertir la moneda: ' + errorMessage,
+      );
     }
   }
 
@@ -41,7 +49,9 @@ export class ExchangeController {
     @Query('date') date: string,
   ) {
     if (!from || !to || !amount || !date) {
-      throw new BadRequestException('Faltan parámetros requeridos: from, to, amount, date');
+      throw new BadRequestException(
+        'Faltan parámetros requeridos: from, to, amount, date',
+      );
     }
 
     if (isNaN(amount) || amount <= 0) {
@@ -49,7 +59,12 @@ export class ExchangeController {
     }
 
     try {
-      const result = await this.exchangeService.convertCurrencyHistorical(from, to, amount, date);
+      const result = await this.exchangeService.convertCurrencyHistorical(
+        from,
+        to,
+        amount,
+        date,
+      );
       return {
         monedaOrigen: from,
         monedaDestino: to,
@@ -60,7 +75,9 @@ export class ExchangeController {
       };
     } catch (error) {
       const errorMessage = (error as Error).message;
-      throw new BadRequestException('Error al convertir la moneda: ' + errorMessage);
+      throw new BadRequestException(
+        'Error al convertir la moneda: ' + errorMessage,
+      );
     }
   }
 
@@ -71,11 +88,16 @@ export class ExchangeController {
       return result;
     } catch (error) {
       const errorMessage = (error as Error).message;
-      throw new BadRequestException('Error al obtener la lista de monedas: ' + errorMessage);
+      throw new BadRequestException(
+        'Error al obtener la lista de monedas: ' + errorMessage,
+      );
     }
   }
 
   private formatNumber(value: number): string {
-    return value.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return value.toLocaleString('es-ES', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
   }
 }
